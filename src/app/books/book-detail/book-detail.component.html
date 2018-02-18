@@ -1,0 +1,21 @@
+<form novalidate (ngSubmit)="save()" *ngIf="book && authors" [formGroup]="form">
+    <fieldset>
+        <h3>{{book.title}}</h3>
+    </fieldset>
+    <p><label for="title"></label><input type="text" name="title" id="title" formControlName="title"></p>
+    <p>
+        <label for="author"></label>
+        <select name="author" id="author" formControlName="authorId">
+            <option *ngFor="let author of authors" [value]="author.id">{{author.name}}</option>
+        </select>
+    </p>
+    <p><label for="publisher"></label><input type="text" name="publisher" id="publisher" formControlName="publisher"></p>
+    <p><label for="year"></label><input type="number" name="year" id="year" formControlName="year"></p>
+    <button type="submit">Save</button>
+    <button (click)="cancel()">Cancel</button>
+</form>
+<div *ngIf="loadingError">
+    Error occurred while loading book details.
+    <br/>
+    <small>{{loadingError | json}}</small>
+</div>
