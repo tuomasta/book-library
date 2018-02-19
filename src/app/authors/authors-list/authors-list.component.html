@@ -1,6 +1,16 @@
-<h1>Books</h1>
+<h2>Authors</h2>
 
-<p *ngFor="let book of books$">
-  {{book.title}}
-  <button type="button">Remove</button>
+<p>
+  <label for="page">Page:</label>
+  <input type="number" name="page" id="page" [ngModel]="pageNumber" (ngModelChange)="changePage($event)">
+</p>
+<p>
+  <label for="search">Search:</label>
+  <input type="text" name="search" id="search" [ngModel]="searchText" (ngModelChange)="searchAuthor($event)">
+</p>
+
+<p *ngFor="let author of authors$ | async; trackBy: trackAuthors" [routerLink]="['./', author.id]">
+  {{author.name}}
+  <small>{{author.yearOfBirth}}</small>
+  <button type="button" (click)="removeAuthor(author, $event)">Remove</button>
 </p>

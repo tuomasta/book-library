@@ -1,0 +1,15 @@
+<form novalidate (ngSubmit)="save()" *ngIf="author" [formGroup]="form">
+  <fieldset>
+      <h3>{{author.name}}</h3>
+  </fieldset>
+  <p *ngFor="let book of author.books">{{book.title}}</p>
+  <p><label for="name"></label><input type="text" name="name" id="name" formControlName="name"></p>
+  <p><label for="yearOfBirth"></label><input type="number" name="yearOfBirth" id="yearOfBirth" formControlName="yearOfBirth"></p>
+  <button type="submit">Save</button>
+  <button (click)="cancel()">Cancel</button>
+</form>
+<div *ngIf="loadingError">
+  Error occurred while loading book details.
+  <br/>
+  <small>{{loadingError | json}}</small>
+</div>

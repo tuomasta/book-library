@@ -7,14 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./books.component.css']
 })
 export class BooksComponent implements OnInit {
-
-  public selectedBook: Book;
   constructor() { }
 
   ngOnInit() {
-  }
-
-  openBookDetails(book: Book) {
-    this.selectedBook = book;
   }
 }

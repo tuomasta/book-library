@@ -48,7 +48,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
       this.form.reset(book);
     });
 
-    this.authorsService.getAuthors().subscribe(authors => this.authors = authors);
+    this.authorsService.getAuthors().subscribe(result => this.authors = result.data);
   }
 
   ngOnDestroy(): void {

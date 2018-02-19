@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('zylab-interview-web-task App', () => {
+describe('Book library App', () => {
   let page: AppPage;
 
   beforeEach(() => {
