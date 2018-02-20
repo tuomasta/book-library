@@ -1,0 +1,11 @@
+mat-form-field {
+    width: 80%;
+}
+
+fieldset {
+    border: none;
+}
+
+:host {
+    text-align: center;
+}

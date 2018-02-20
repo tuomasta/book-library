@@ -29,7 +29,7 @@ export class AuthorsService {
         return this.httpClient.get<Author[]>(`app/${this.authors}`, { params: params })
         .map(authors => {
             // this should actually happen on a server
-            const startIndex = page ? (page.pageNumber - 1) * page.itemsPerPage : 0;
+            const startIndex = page ? page.pageNumber * page.itemsPerPage : 0;
             return {
                 numberOfItems: authors.length,
                 data: page ?

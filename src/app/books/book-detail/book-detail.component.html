@@ -1,18 +1,26 @@
 <form novalidate (ngSubmit)="save()" *ngIf="book && authors" [formGroup]="form">
     <fieldset>
-        <h3>{{book.title}}</h3>
+        <legend>
+            <h3>{{book.title | uppercase}}</h3>
+        </legend>
+        
+        <mat-form-field>
+            <input matInput placeholder="title" type="text" name="title" id="title" formControlName="title">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="author" name="author" id="author" formControlName="authorId">
+                <mat-option *ngFor="let author of authors" [value]="author.id">{{author.name}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="publisher" type="text" name="publisher" id="publisher" formControlName="publisher">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Year of publishing" type="number" name="year" id="year" formControlName="year">
+        </mat-form-field>
     </fieldset>
-    <p><label for="title"></label><input type="text" name="title" id="title" formControlName="title"></p>
-    <p>
-        <label for="author"></label>
-        <select name="author" id="author" formControlName="authorId">
-            <option *ngFor="let author of authors" [value]="author.id">{{author.name}}</option>
-        </select>
-    </p>
-    <p><label for="publisher"></label><input type="text" name="publisher" id="publisher" formControlName="publisher"></p>
-    <p><label for="year"></label><input type="number" name="year" id="year" formControlName="year"></p>
-    <button type="submit">Save</button>
-    <button (click)="cancel()">Cancel</button>
+    <button mat-button type="submit">Save</button>
+    <button mat-button (click)="cancel()">Cancel</button>
 </form>
 <div *ngIf="loadingError">
     Error occurred while loading book details.

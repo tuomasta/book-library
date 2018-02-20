@@ -1,15 +1,15 @@
-<h2>Books</h2>
-
-<p>
-  <label for="page">Page:</label>
-  <input type="number" name="page" id="page" [ngModel]="pageNumber" (ngModelChange)="changePage($event)">
-</p>
-<p>
-  <label for="search">Search:</label>
-  <input type="text" name="search" id="search" [ngModel]="searchText" (ngModelChange)="searchBook($event)">
-</p>
-
-<p *ngFor="let book of books$ | async; trackBy: trackBooks" [routerLink]="['./', book.id]">
-  {{book.title}}
-  <button type="button" (click)="removeBook(book, $event)">Remove</button>
-</p>
+<div class="container">
+    <h2>
+      Books
+    </h2>
+    <mat-form-field>
+        <input matInput placeholder="search books" type="text" name="search" id="search" [ngModel]="searchText" (ngModelChange)="searchBook($event)">
+    </mat-form-field>
+    <mat-divider></mat-divider>
+    <p *ngFor="let book of books$ | async; trackBy: trackBooks" [routerLink]="['./', book.id]">
+      {{book.title}}
+      <button mat-icon-button type="button" (click)="removeBook(book, $event)"><mat-icon>delete</mat-icon></button>
+    </p>
+    <mat-divider></mat-divider>
+    <mat-paginator [pageIndex]="pageNumber" [length]="pages" [pageSize]="pageSize" (page)="changePage($event)"></mat-paginator>
+  </div>

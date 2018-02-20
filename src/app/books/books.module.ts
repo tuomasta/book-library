@@ -5,6 +5,12 @@ import { BookListComponent } from './book-list/book-list.component';
 import { BooksComponent } from './books/books.component';
 import { BookDetailComponent } from './book-detail/book-detail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  MatIconModule,
+  MatButtonModule,
+  MatCardModule,
+  MatPaginatorModule,
+  MatInputModule, MatSelectModule, MatDividerModule } from '@angular/material';
 
 const routes: Routes = [
   {
@@ -21,6 +27,13 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule,
+    MatPaginatorModule,
+    MatInputModule,
+    MatSelectModule,
     RouterModule.forChild(routes),
   ],
   declarations: [BookListComponent, BooksComponent, BookDetailComponent]

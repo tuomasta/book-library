@@ -28,7 +28,7 @@ export class BookService {
         return this.httpClient.get<Book[]>(`app/${this.books}`, { params: params })
         .map(books => {
             // this should actually happen on a server
-            const startIndex = (page - 1) * booksPerPage;
+            const startIndex = page * booksPerPage;
             return {
                 numberOfItems: books.length,
                 data: books.slice(startIndex, Math.min(startIndex + booksPerPage, books.length))

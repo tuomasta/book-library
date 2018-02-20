@@ -13,6 +13,7 @@ import 'rxjs/add/operator/map';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-book-list',
@@ -22,8 +23,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class BookListComponent implements OnInit {
   public books$: Observable<Book[]>;
   public searchText: string;
-  public pageNumber = 1;
+  public pageNumber = 0;
   public pages;
+  public pageSize = 5;
 
   private pageChanged = new BehaviorSubject<number>(this.pageNumber);
   private searchChanged = new BehaviorSubject<string>('');
@@ -36,7 +38,7 @@ export class BookListComponent implements OnInit {
                   .distinctUntilChanged()
                   .combineLatest(this.pageChanged, (search, page) => ({ page: page, search: search }))
                   .combineLatest(this.route.url, (change, url) => change)
-                  .switchMap(change => this.bookService.getBooks(change.page, 3, change.search))
+                  .switchMap(change => this.bookService.getBooks(change.page, this.pageSize, change.search))
                   .map(result => {
                     this.pages = result.numberOfItems;
                     return result.data;
@@ -59,9 +61,10 @@ export class BookListComponent implements OnInit {
     return book.id;
   }
 
-  changePage(page: number): void {
-    this.pageNumber = page;
-    this.pageChanged.next(page);
+  changePage(page: PageEvent): void {
+    console.log('page', page);
+    this.pageNumber = page.pageIndex;
+    this.pageChanged.next(page.pageIndex);
   }
 
   searchBook(search: string): void {

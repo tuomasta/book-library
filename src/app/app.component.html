@@ -1,11 +1,7 @@
-<mat-toolbar color="primary" class="mat-elevation-z6">
-  <a data-test-toolbar-books-link routerLink="/books" routerLinkActive="router-link-active">Books</a>
-  <a data-test-toolbar-authors-link routerLink="/authors" routerLinkActive="router-link-active">Authors</a>
-</mat-toolbar>
-
-<div style="text-align:center">
-  <h3 data-test-app-title>
-    Welcome to our Library!
-    <router-outlet></router-outlet>
-  </h3>
-</div>
+<header>
+  <mat-toolbar color="primary" class="mat-elevation-z6">
+    <a data-test-toolbar-books-link routerLink="/books" routerLinkActive="router-link-active">Books</a>
+    <a data-test-toolbar-authors-link routerLink="/authors" routerLinkActive="router-link-active">Authors</a>
+  </mat-toolbar>
+</header>
+<router-outlet></router-outlet>

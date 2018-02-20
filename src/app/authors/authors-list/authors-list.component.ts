@@ -6,6 +6,7 @@ import { Author } from '../../shared/author';
 import { AuthorsService } from '../../core/services/authors.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-authors-list',
@@ -15,8 +16,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class AuthorsListComponent implements OnInit {
   public authors$: Observable<Author[]>;
   public searchText: string;
-  public pageNumber = 1;
+  public pageNumber = 0;
   public pages;
+  public pageSize = 4;
 
   private pageChanged = new BehaviorSubject<number>(this.pageNumber);
   private searchChanged = new BehaviorSubject<string>('');
@@ -29,7 +31,8 @@ export class AuthorsListComponent implements OnInit {
                   .distinctUntilChanged()
                   .combineLatest(this.pageChanged, (search, page) => ({ page: page, search: search }))
                   .combineLatest(this.route.url, (change, url) => change)
-                  .switchMap(change => this.authorService.getAuthors({ pageNumber: change.page, itemsPerPage: 3}, change.search))
+                  .switchMap(
+                    change => this.authorService.getAuthors({ pageNumber: change.page, itemsPerPage: this.pageSize}, change.search))
                   .map(result => {
                     this.pages = result.numberOfItems;
                     return result.data;
@@ -52,9 +55,9 @@ export class AuthorsListComponent implements OnInit {
     return author.id;
   }
 
-  changePage(page: number): void {
-    this.pageNumber = page;
-    this.pageChanged.next(page);
+  changePage(page: PageEvent): void {
+    this.pageNumber = page.pageIndex;
+    this.pageChanged.next(page.pageIndex);
   }
 
   searchAuthor(search: string): void {

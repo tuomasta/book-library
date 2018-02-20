@@ -14,6 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RoutingModule } from './routing.module';
 import { LibraryInMemoryDbService } from './db-services/library.db-service';
 import { BooksModule } from './books/books.module';
+import { MatButtonModule, MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [
