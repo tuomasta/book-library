@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/of';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 import { Author } from '../../shared/author';
 import { AuthorsService } from '../../core/services/authors.service';
 
@@ -23,7 +23,7 @@ export class BookDetailComponent implements OnInit, OnDestroy {
   public loadingError: string;
   public form = new FormGroup({
     'title': new FormControl('', [Validators.required, Validators.maxLength(140)]),
-    'authorId': new FormControl('', [Validators.required, value => this.authors && this.authors.find(author => author.id === +value)]),
+    'authorId': new FormControl('', [Validators.required, this.validateAuthorId()]),
     'publisher': new FormControl('', [Validators.required]),
     'year': new FormControl('', [Validators.required])
   });
@@ -74,5 +74,12 @@ export class BookDetailComponent implements OnInit, OnDestroy {
 
   private navigateToBooks(): void {
     this.router.navigate(['/books']);
+  }
+
+  validateAuthorId(): ValidatorFn {
+    return (control: AbstractControl): {[key: string]: any} => {
+      const authorExists = this.authors && this.authors.find(author => author.id === +control.value);
+      return authorExists ? null : {'invalidAuthor': {value: control.value}};
+    };
   }
 }

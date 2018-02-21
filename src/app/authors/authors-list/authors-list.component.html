@@ -6,7 +6,8 @@
       <input matInput placeholder="search authors" type="text" name="search" id="search" [ngModel]="searchText" (ngModelChange)="searchAuthor($event)">
   </mat-form-field>
   <mat-divider></mat-divider>
-  <p *ngFor="let author of authors$ | async; trackBy: trackAuthors" [routerLink]="['./', author.id]">
+  <p *ngFor="let author of authors$ | async; trackBy: trackAuthors"
+    [attr.data-test-authors-list-author]="author.id" [routerLink]="['./', author.id]">
     {{author.name}}
     <small>{{author.yearOfBirth}}</small>
     <button mat-icon-button type="button" (click)="removeAuthor(author, $event)"><mat-icon>delete</mat-icon></button>

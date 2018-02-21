@@ -1,15 +1,23 @@
 <div class="container">
-    <h2>
+    <h2 data-test-books-list-header>
       Books
     </h2>
     <mat-form-field>
-        <input matInput placeholder="search books" type="text" name="search" id="search" [ngModel]="searchText" (ngModelChange)="searchBook($event)">
+        <input data-test-books-list-search matInput
+          placeholder="search books" type="text" name="search" id="search" 
+          [ngModel]="searchText" (ngModelChange)="searchBook($event)">
     </mat-form-field>
     <mat-divider></mat-divider>
-    <p *ngFor="let book of books$ | async; trackBy: trackBooks" [routerLink]="['./', book.id]">
+    <p *ngFor="let book of books$ | async; trackBy: trackBooks" 
+      [attr.data-test-books-list-book]="book.id"
+      [routerLink]="['./', book.id]">
       {{book.title}}
-      <button mat-icon-button type="button" (click)="removeBook(book, $event)"><mat-icon>delete</mat-icon></button>
+      <button [attr.data-test-books-list-book-remove]="book.id" mat-icon-button
+        type="button" (click)="removeBook(book, $event)"><mat-icon>delete</mat-icon>
+      </button>
     </p>
     <mat-divider></mat-divider>
-    <mat-paginator [pageIndex]="pageNumber" [length]="pages" [pageSize]="pageSize" (page)="changePage($event)"></mat-paginator>
+    <mat-paginator data-test-books-list-paginator 
+      [pageIndex]="pageNumber" [length]="pages" [pageSize]="pageSize" (page)="changePage($event)">
+    </mat-paginator>
   </div>

@@ -44,7 +44,7 @@ export class BookService {
     deleteBooksByAuthorId(authorId: number): Observable<Book> {
         // should happen in back end using some more efficient way such as message bus
         return this.getBooksByAuthorId(authorId)
-            .switchMap(books => {
+            .mergeMap(books => {
                 if (books.length === 0) { return Observable.of(undefined); }
                 return Observable.merge(books.map(book => this.deleteBook(book.id))).mergeMap(obs => obs);
             });

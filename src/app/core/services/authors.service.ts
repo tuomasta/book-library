@@ -7,6 +7,7 @@ import { Observable } from 'rxjs/Observable';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/observable/of';
 
@@ -52,7 +53,7 @@ export class AuthorsService {
     deleteAuthor(id: number): Observable<Author> {
         return this.httpClient
             .delete<Author>(`app/${this.authors}/${id}`)
-            .switchMap(author => {
+            .mergeMap(author => {
                 return this.bookService.deleteBooksByAuthorId(id).map(_ => author);
             });
     }

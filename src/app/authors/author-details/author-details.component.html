@@ -5,8 +5,16 @@
     </legend>
     <h4>Books</h4>
     <p *ngFor="let book of author.books">{{book.title}}</p>
-    <mat-form-field><input matInput placeholder="name" type="text" name="name" id="name" formControlName="name"></mat-form-field>
-    <mat-form-field><input matInput placeholder="year of birth" type="number" name="yearOfBirth" id="yearOfBirth" formControlName="yearOfBirth"></mat-form-field>
+    <mat-form-field>
+      <input 
+        data-test-author-details-name matInput 
+        placeholder="name" type="text" name="name" id="name" formControlName="name">
+    </mat-form-field>
+    <mat-form-field>
+      <input 
+        data-test-author-details-year matInput
+        placeholder="year of birth" type="number" name="yearOfBirth" id="yearOfBirth" formControlName="yearOfBirth">
+    </mat-form-field>
   </fieldset>
   <button mat-button type="submit">Save</button>
   <button mat-button (click)="cancel()">Cancel</button>

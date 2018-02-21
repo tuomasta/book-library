@@ -11,6 +11,8 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/map';
 
+import 'rxjs/add/observable/empty';
+
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PageEvent } from '@angular/material';
@@ -24,7 +26,7 @@ export class BookListComponent implements OnInit {
   public books$: Observable<Book[]>;
   public searchText: string;
   public pageNumber = 0;
-  public pages;
+  public pages = 0;
   public pageSize = 5;
 
   private pageChanged = new BehaviorSubject<number>(this.pageNumber);
@@ -62,7 +64,6 @@ export class BookListComponent implements OnInit {
   }
 
   changePage(page: PageEvent): void {
-    console.log('page', page);
     this.pageNumber = page.pageIndex;
     this.pageChanged.next(page.pageIndex);
   }

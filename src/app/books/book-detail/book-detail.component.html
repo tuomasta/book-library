@@ -5,18 +5,18 @@
         </legend>
         
         <mat-form-field>
-            <input matInput placeholder="title" type="text" name="title" id="title" formControlName="title">
+            <input data-test-books-details-title matInput placeholder="title" type="text" name="title" id="title" formControlName="title">
         </mat-form-field>
         <mat-form-field>
-            <mat-select placeholder="author" name="author" id="author" formControlName="authorId">
+            <mat-select data-test-books-details-authorId placeholder="author" name="authorId" id="authorId" formControlName="authorId">
                 <mat-option *ngFor="let author of authors" [value]="author.id">{{author.name}}</mat-option>
             </mat-select>
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="publisher" type="text" name="publisher" id="publisher" formControlName="publisher">
+            <input data-test-books-details-publisher matInput placeholder="publisher" type="text" name="publisher" id="publisher" formControlName="publisher">
         </mat-form-field>
         <mat-form-field>
-            <input matInput placeholder="Year of publishing" type="number" name="year" id="year" formControlName="year">
+            <input matInput data-test-books-details-year placeholder="Year of publishing" type="number" name="year" id="year" formControlName="year">
         </mat-form-field>
     </fieldset>
     <button mat-button type="submit">Save</button>
